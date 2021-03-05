@@ -1,0 +1,2 @@
+[16-Oct-2020 13:43:30 UTC] PHP Warning:  require(/home2/bridged9/public_html/notes/../vendor/autoload.php): failed to open stream: No such file or directory in /home2/bridged9/public_html/notes/index.php on line 34
+[16-Oct-2020 13:43:30 UTC] PHP Fatal error:  require(): Failed opening required '/home2/bridged9/public_html/notes/../vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home2/bridged9/public_html/notes/index.php on line 34
