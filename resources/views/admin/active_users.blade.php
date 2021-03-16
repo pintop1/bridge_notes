@@ -29,6 +29,7 @@
 					<h4>Active Accounts</h4>
 				</div>
 				<div class="card-body">
+					<a href="/admin/users/create" class="btn btn-primary mb-2">Add new user</a>
 					<div class="table-responsive">
 						<table class="table table-striped table-hover" id="tableT">
 							<thead>

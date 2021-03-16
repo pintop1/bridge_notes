@@ -271,7 +271,7 @@ $kin = $user->kin;
         </div>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-6">
+    {{--<div class="col-12 col-md-6 col-lg-6">
         <div class="card">
             <div class="padding-0">
                 <div class="card-header">
@@ -310,7 +310,7 @@ $kin = $user->kin;
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 
 </div>
 @endsection

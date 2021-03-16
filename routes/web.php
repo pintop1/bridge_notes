@@ -28,7 +28,7 @@ use App\Http\Controllers\Sorted\UserController;
 Route::get('/', function(){
 	return redirect('/dashboard');
 });
-Route::group(['prefix' => 'loader'], function(){
+/*Route::group(['prefix' => 'loader'], function(){
 	Route::post('/loadActiveUsers', [Loader::class, 'loadActiveUsers'])->name('admin.users.active');
 	Route::post('/loadMyInvestments', [Loader::class, 'loadMyInvestments'])->name('my_investments');
 	Route::post('/loadActiveInvestments', [Loader::class, 'loadActiveInvestments'])->name('active.invests');
@@ -37,9 +37,7 @@ Route::group(['prefix' => 'loader'], function(){
 	Route::post('/loadDeclinedInvestments', [Loader::class, 'loadDeclinedInvestments'])->name('declined.invests');
 	Route::post('/loadAllInvestments', [Loader::class, 'loadAllInvestments'])->name('all.invests');
 	Route::post('/loadPaidInvestment', [Loader::class, 'loadPaidInvestment'])->name('paid.invests');
-});
-
-
+});*/
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum,web', 'verified', 'admin:admin']], function(){
 	Route::get('/login', [AdminController::class, 'loginForm']);
 	Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
@@ -51,10 +49,18 @@ Route::group(['prefix'=>'admin', 'middleware'=>['is_admin']], function(){
 	Route::get('/reports/create', [AdminActions::class, 'reportPost'])->name('admin.reports');
 	Route::group(['prefix'=>'/users'], function() {
 		Route::get('/', [AdminActions::class, 'active_users']);
+		Route::get('/create', [AdminActions::class, 'create_user']);
+		Route::post('/create', [AdminActions::class, 'store_user']);
 		Route::get('/tdelete/{id}', [AdminActions::class, 'userDeleteContent']);
 		Route::get('/delete/{id}', [AdminActions::class, 'deleteUser']);
 		Route::post('/delete/multiple', [AdminActions::class, 'multipleDelete'])->name('admin.user.multiple.delete');
 		Route::get('/view/{id}', [AdminActions::class, 'viewUser']);
+
+		Route::post('/updateProfileInfo', [UserController::class, 'update'])->name('updateProfile');
+		Route::post('/updateInfo', [UserController::class, 'updateInfo'])->name('updateInfo');
+		Route::post('/updateKin', [UserController::class, 'updateKin'])->name('updateKin');
+		Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
+		Route::post('/updateCompany', [UserController::class, 'updateCompany'])->name('updateCompany');
 	});
 	Route::group(['prefix'=>'investments'], function() {
 		Route::get('/add', [AdminActions::class, 'addInvestment']);
@@ -86,10 +92,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>['is_admin']], function(){
 	Route::post('/my/updateProfileInfo', [AdminActions::class, 'updateMy'])->name('admin.my.updateProfileInfo');
 	Route::post('/my/updatePassword', [AdminActions::class, 'updatePasswordMy'])->name('admin.my.updatePassword');
 	Route::get('/investments/interests/pay/{id}', [AdminActions::class, 'payInterests']);
+
 });
 
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth:sanctum,web', 'verified']], function() {
+/*Route::group(['prefix' => 'dashboard', 'middleware' => ['auth:sanctum,web', 'verified']], function() {
 	Route::group(['middleware'=>['is_user', 'is_complete']], function(){
 		Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
 		Route::get('/plans', [HomeController::class, 'plans']);
@@ -106,7 +113,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth:sanctum,web', 'ver
 	Route::post('/updateKin', [UserController::class, 'updateKin'])->name('updateKin');
 	Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
 	Route::post('/updateCompany', [UserController::class, 'updateCompany'])->name('updateCompany');
-});
+});*/
 
 Route::post('/logout', LogoutController::class)->name('logout')->middleware('auth:web');
 Route::get('/email/verify', function () {

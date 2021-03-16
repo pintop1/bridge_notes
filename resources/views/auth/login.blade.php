@@ -53,7 +53,7 @@
                 Login
                 </button>
             </div>
-            <div class="text-center text-bold">Don't have an account yet? <a href="/register">Sign up</a></div>
+            {{--<div class="text-center text-bold">Don't have an account yet? <a href="/register">Sign up</a></div>--}}
         </form>
     </div>
 </div>

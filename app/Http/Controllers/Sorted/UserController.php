@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find($request->user);
         $data = $request->only(['firstname', 'lastname', 'othername', 'mobile']);
         if($user->account_type == "Cooperate") $data['company'] = $request->only(['company_name', 'rc_number', 'tin', 'c_address']);
         if($request->hasFile('photo')){
@@ -104,7 +104,7 @@ class UserController extends Controller
     }
 
     public function dashboard(){
-        $user = Auth::user();
+        $user = User::find($request->user);
         $data['activeInvests'] = $user->investments()->where('status', 'active')->sum('amount');
         $data['totalInvests'] = $user->investments()->sum('amount');
         $data['totalPay'] = $user->investments()->where('payout','paid')->sum('amount');
@@ -113,21 +113,21 @@ class UserController extends Controller
     }
 
     public function updateInfo(Request $request){
-        $user = Auth::user();
+        $user = User::find($request->user);
         $data = $request->except('_token');
         $user->update(['user_data'=>$data]);
         return redirect()->back()->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your update was successful.</div></div>');
     }
 
     public function updateKin(Request $request){
-        $user = Auth::user();
+        $user = User::find($request->user);
         $data = $request->except('_token');
         if($user->kin) $user->kin()->update($data);
         else $user->kin()->save(new Kin($data));
         return redirect()->back()->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your update was successful.</div></div>');
     }
 
-    public function updatePassword(Request $request){
+    /*public function updatePassword(Request $request){
         $user = Auth::user();
         $validator = Validator::make($request->all(), [
             'current_password' => ['required', 'string'],
@@ -144,5 +144,5 @@ class UserController extends Controller
             'password' => \Hash::make($request->password),
         ]);
         return redirect()->back()->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your update was successful.</div></div>');
-    }
+    }*/
 }

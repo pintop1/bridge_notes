@@ -66,6 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['user_data'] = json_encode($value);
     }
 
+    public function getProfilePhotoPathAttribute() {
+        return 'storage/'.$this->attributes['profile_photo_path'];
+    } 
+
     /**
      * The attributes that should be hidden for arrays.
      *

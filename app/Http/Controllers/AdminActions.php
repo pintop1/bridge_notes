@@ -35,6 +35,31 @@ class AdminActions extends Controller
         return view('admin.dashboard', $data);
     }
 
+    public function create_user()
+    {
+        return view('admin.add_user');
+    }
+
+    public function store_user(Request $request)
+    {
+        Validator::make($request->all(), [
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'type' => ['required', 'string', 'max:255'],
+        ])->validate();
+
+        User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'email_verified_at'=>now(),
+            'password' => Hash::make('notes@2021'),
+            'account_type' => $request->type,
+        ]);
+        return redirect('/admin/users')->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>User entries successfully created</div></div>');
+    }
+
     public function active_users(){
         $data['users'] = User::where('email_verified_at', '!=', null)->where('is_admin', false)->latest()->get();
         return view('admin.active_users', $data);
@@ -293,7 +318,7 @@ class AdminActions extends Controller
             'action_title'=>'View Investment',
         ];
         Mail::to($user->email)->send(new UserMail($my_msg));
-        return redirect('/dashboard/investments')->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your investment has been booked for administrative approval.</div></div>');
+        return redirect('/admin/investments')->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your investment has been booked for administrative approval.</div></div>');
     }
 
 
