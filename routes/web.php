@@ -26,7 +26,7 @@ use App\Http\Controllers\Sorted\UserController;
 */
 
 Route::get('/', function(){
-	return redirect('/dashboard');
+	return redirect('/admin/dashboard');
 });
 /*Route::group(['prefix' => 'loader'], function(){
 	Route::post('/loadActiveUsers', [Loader::class, 'loadActiveUsers'])->name('admin.users.active');
