@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum,web', 'verifie
 	Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 Route::post('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout')->middleware('auth:admin');
-Route::group(['prefix'=>'admin', 'middleware'=>['is_admin']], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function(){
 	Route::get('/dashboard', [AdminActions::class, 'dashboard'])->name('admin.dashboard');
 	Route::get('/reports', [AdminActions::class, 'reports']);
 	Route::get('/reports/create', [AdminActions::class, 'reportPost'])->name('admin.reports');
