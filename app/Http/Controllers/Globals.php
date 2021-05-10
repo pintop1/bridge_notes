@@ -12,6 +12,7 @@ use App\Models\Payout;
 use Mail;
 use Auth;
 use App\Models\Kin;
+use App\Models\Plan;
 
 class Globals extends Controller
 {

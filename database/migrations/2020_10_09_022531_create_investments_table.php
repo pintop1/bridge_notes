@@ -27,6 +27,7 @@ class CreateInvestmentsTable extends Migration
             $table->string('payment_type')->nullable();
             $table->string('interest')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('plan_id');
             $table->timestamps();
         });
     }

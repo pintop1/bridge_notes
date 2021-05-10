@@ -9,9 +9,9 @@ $ddate2 = $date2[2].'-'.$date2[0].'-'.$date2[1];
 $data = array();
 $invs = DB::table('investments')->whereBetween('created_at', [$ddate1, $ddate2])->orderBy('id', 'asc')->get();
 $i =1;
-foreach ($invs as $inv) {
-    $user = DB::table('users')->where('email', $inv->user)->first();
-    $plan = Utils::getPlan($inv->plan);
+ foreach ($invs as $inv) {
+    $user = DB::table('users')->where('id', $inv->user_id)->first();
+    $plan = Utils::getPlan($inv->plan_id);
     $interest = Utils::getInterests($inv->tenor." ".$inv->tenor_type, $inv->amount, $plan->interests);
     $nestedData['sn'] = $i++;
     $nestedData['name'] =  strtoupper($user->firstname.' '.$user->lastname.' '.$user->othername);
@@ -26,7 +26,11 @@ foreach ($invs as $inv) {
     $nestedData['interest_payout'] = number_format($interest / Utils::addMonths($inv->payment_type),2);
     $nestedData['witholding_tax'] = number_format(Utils::getWitholdingTax($plan->witholding_tax, $interest), 2);
     $data[] = $nestedData;
+//catch(Exception $e)
+//{
+//}
 }
+
 @endphp
 <table>
     <thead>

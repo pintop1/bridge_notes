@@ -15,6 +15,7 @@ $data = $user->user_data();
 				padding: 25px;
 				margin: 25px;
 				font-family: calibri;
+				font-size: 0.6em;
 			}
 			.inline {
 				display: inline-block;
@@ -43,12 +44,13 @@ $data = $user->user_data();
 			table tr th {
 				text-align: left;
 				font-weight: lighter;
-				margin-bottom: 40px;
+				margin-bottom: 20px;
 			}
 			.input {
-				border: 3px solid #000;
-				padding: 10px 15px;
+				border: 1px solid #000;
+				padding: 5px 7px;
 				margin-right: 20px;
+				font-size: 0.8em;
 			}
 			.width {
 				width: 263px;
@@ -57,11 +59,13 @@ $data = $user->user_data();
 				height: 2px;
 				width: 200px;
 				min-width: 90px;
-				border-bottom: 1px solid #222;
+				border-bottom: 1px solid #222; position: 20px;
+				
 			}
 			.dlt {
-				float: right;
+				float: right; position: 20px;
 			}
+		
 		</style>
 	</head>
 	<body>
@@ -157,10 +161,11 @@ $data = $user->user_data();
 				Extension of period (if necessary) would be agreed by both parties.<br><br>Thank you for your confidence in us<br>
 				<br>Yours faithfully<br>
 				<div class="sign inline">
-					For: BRIDGE CREDIT LIMITED<br><br>
+					For: BRIDGE CREDIT LIMITED<br><br><br>
 					<div class="line">
 						<span style="visibility: hidden;">my name is babatunde ayokunmi dawodu</span>
 					</div>
+					<br>
 					<div class="auto">Authorized Signatory</div>
 				</div>
 				<div class="sign inline dlt">
@@ -168,6 +173,7 @@ $data = $user->user_data();
 					<div class="line">
 						<span style="visibility: hidden;">my name is babatunde ayokunmi dawodu</span>
 					</div>
+					<br>
 					<div class="auto">Authorized Signatory</div>
 				</div>
 			</div>
