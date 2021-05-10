@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Sorted;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Kin;
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Investment;
@@ -119,9 +120,9 @@ class UserController extends Controller
         return redirect()->back()->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your update was successful.</div></div>');
     }
 
-    public function updateKin(Request $request){
-        $user = User::find($request->user);
-        $data = $request->except('_token');
+    public function updateKin(Request $req){
+        $user = User::find($req->user);
+        $data = $req->except(['_token', 'user']);
         if($user->kin) $user->kin()->update($data);
         else $user->kin()->save(new Kin($data));
         return redirect()->back()->with('message', '<div class="alert alert-success alert-dismissible alert-has-icon show fade"><div class="alert-icon"><i class="fas fa-check-double"></i></div><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your update was successful.</div></div>');
